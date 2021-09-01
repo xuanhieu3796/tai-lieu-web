@@ -1,0 +1,42 @@
+@font-face {
+    font-family: 'Roboto-Bold';
+    src: url('../fonts/roboto-bold.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Roboto';
+    src: url('../fonts/roboto-regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Roboto-Medium';
+    src: url('../fonts/roboto-medium.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Roboto-Italic';
+    src: url('../fonts/roboto-italic.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+xuanhieu3796@gmail.com
+
+
+@font-face {
+    font-family: 'Tinos-Bold';
+    src: url('../fonts/tinos-bold.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Tinos';
+    src: url('../fonts/tinos-regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+font-family: 'Lobster';

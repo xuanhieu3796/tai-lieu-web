@@ -1,0 +1,12 @@
+public function get_thumb($file, $thumb = '260') {
+        $item = explode('/', $file);
+        $count = sizeof($item);
+        $item[$count - 1] = 'thumb/thumb_'.$thumb.'_' . $item[$count - 1];
+        $img = implode('/', $item);
+		if(!is_file($img)) {
+			$img = $file;
+		}
+        return Router::url('/', true).$img;
+    }
+
+{assign var = url_img value = "{$this->HtmlProduct->get_thumb($item.url_img, 550)}"}

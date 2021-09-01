@@ -1,0 +1,30 @@
+<div class="nav-right {if $device eq 2} nav_mobile bg-main max-992px-show{/if}">
+    <div class="box-search-mobile Foatright item-inline item-dropdown">
+
+        <a href="#" class="btn-show-search">
+            <i class="fa fa-search"></i>
+        </a>
+        <div class="box-search">
+            <form id="form-suggestion" data-type="products" class="form-inline"
+                  action="{Router::url('/', true)}search/products/basic-search-product" method="get"
+                  enctype="multipart/form-data">
+                <div class="form-group">
+                    <div class="input-group">
+                        <input name="keyword" class="form-control search-suggestion"
+                               placeholder="{__d('default','search_keyword')}"
+                               type="text">
+                    </div>
+                </div>
+                <button class="btn btn-search btn-main btn-submit" type="submit">
+                    <i aria-hidden="true" class="fa fa-search"></i>
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        nh_search_suggestion.init();
+    });
+</script>

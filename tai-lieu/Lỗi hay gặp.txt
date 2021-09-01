@@ -1,0 +1,11 @@
+Ngắt thuộc tính sau tên sản phẩm 
+
+<script>
+	{if !empty($arr_data.name)}
+		var title_name_product = '{$arr_data.name}';
+		var arr_title_name_product = title_name_product.split("(");
+		$('.title-name-product').html(arr_title_name_product[0]);
+	{/if}
+</script>
+
+

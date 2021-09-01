@@ -1,0 +1,123 @@
+{assign icons value = $this->Block->getLocale('icons', $data_extend)}
+<div class="hight-light">
+    <div class="row">
+        {if !empty($icons)}
+            {foreach from = $icons item = icon}
+                <div class="col-6 col-lg-3">
+                    <div class="entry-content">
+                        <div class="inner-icon">
+                            <i class="{if !empty($icon.icon)}{$icon.icon}{/if}"></i>
+                        </div>
+                        <div class="inner-content">
+                            <h4>
+                                {if !empty($icon.title)}
+                                    {$icon.title}
+                                {/if}
+                            </h4>
+                            <p>
+                                {if !empty($icon.description)}
+                                    {$icon.description}
+                                {/if}
+                            </p>
+                            <p>
+                                {if !empty($icon.image)}
+                                    <img src="{$this->Utilities->replaceVariableSystem($icon.image)}">
+                                {/if}
+                            </p>
+                        </div>
+                    </div>
+                </div>      
+            {/foreach}
+        {/if}
+    </div>
+</div>
+
+data_extend
+dữ liệu mở rộng
+{
+	"locale": {
+		"vi": {
+			"icons": [
+				{
+					"title": "Miễn phí vận chuyển ",
+					"description": "Đơn hàng trên 500K",
+					"icon": "las la-truck",
+					"image": "{URL_TEMPLATE}assets/media/brand/no-avatar.jpg"
+				},
+				{
+					"title": "Thanh toán nhanh chóng",
+					"description": "Đơn hàng trên 500K",
+					"icon": "las la-wallet",
+					"image": "{URL_TEMPLATE}assets/media/brand/partner-brand-1.png"
+				},
+				{
+					"title": "3333333",
+					"description": "Đơn hàng trên 500K",
+					"icon": "las la-truck",
+					"image": "{URL_TEMPLATE}assets/media/brand/partner-brand-2.png"
+				},
+				{
+					"title": "44444",
+					"description": "Đơn hàng trên 500K",
+					"icon": "las la-truck",
+					"image": "{URL_TEMPLATE}assets/media/brand/partner-brand-3.png"
+				}
+			]
+		}
+	}
+}
+
+{
+	"locale": {
+		"vi": {
+			"tieu_de": "GÀ MẠNH HOẠCH CHẤT LƯỢNG SỐ 1",
+			"mo_ta": "Cho bữa ăn thêm hoàn hảo!"
+		}
+	},
+	"col": "col-lg-4 col-md-6 col-6"
+}
+
+{
+	"locale": {
+		"vi": {
+			"tieu_de": "Quần áo cho nữ"
+		},
+		"en": {
+			"tieu_de": "Clothes for woman"
+		}
+	},
+	"slider": {
+		"infinite": true,
+		"slidesToShow": 4,
+		"slidesToScroll": 4,
+		"dots": true,
+		"arrows": true,
+		"adaptiveHeight": true,
+		"autoplay": false,
+		"autoplaySpeed": 2000,
+		"responsive": [
+			{
+				"breakpoint": 1024,
+				"settings": {
+					"infinite": true,
+					"dots": true
+				}
+			},
+			{
+				"breakpoint": 600,
+				"settings": {
+					"slidesToShow": 2,
+					"slidesToScroll": 2
+				}
+			},
+			{
+				"breakpoint": 480,
+				"settings": {
+					"slidesToShow": 1,
+					"slidesToScroll": 1
+				}
+			}
+		]
+	},
+	"col": "col-lg-3 col-md-6 col-6"
+}

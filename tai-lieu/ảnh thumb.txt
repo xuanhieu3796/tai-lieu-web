@@ -1,0 +1,52 @@
+ public function get_thumb_260($img, $thumb = '260') {
+        $item = explode('/', $img);
+        $count = sizeof($item);
+        $item[$count - 1] = 'thumb/thumb_'.$thumb.'_' . $item[$count - 1];
+        $img = implode('/', $item);
+        return $img;
+    }
+    public function get_thumb_150($img, $thumb = '150') {
+        $item = explode('/', $img);
+        $count = sizeof($item);
+        $item[$count - 1] = 'thumb_'.$thumb.'_' . substr($item[$count - 1], 10);
+        $img = implode('/', $item);
+        return $img;
+    }
+
+    public function get_thumb_350($img, $thumb = '350') {
+        $item = explode('/', $img);
+        $count = sizeof($item);
+        $item[$count - 1] = 'thumb/thumb_'.$thumb.'_' . $item[$count - 1];
+        $img = implode('/', $item);
+        return $img;
+    }
+	
+	public function get_thumb_150($img, $thumb = '150') {
+        $item = explode('/', $img);
+        $count = sizeof($item);
+        $item[$count - 1] = 'thumb/thumb_'.$thumb.'_' . $item[$count - 1];
+        $img = implode('/', $item);
+        return $img;
+    }
+	
+	//Thumb cho sản phẩm
+	
+	 public function get_thumb_260_edit($img, $thumb = '260') {
+        $item = explode('/', $img);
+        $count = sizeof($item);
+        $item[$count - 1] = $item[$count - 1];
+        $img = implode('/', $item);
+        return $img;
+    }
+	    <a class="img-news" href="{$link}">
+            {if !empty($item.url_img)}
+                {assign var = url_img value = "{Router::url('/', true)}{$this->HtmlProduct->get_thumb_260($item.url_img)}"}
+            {else}
+                {assign var = url_img value = "{Router::url('/', true)}img/no-image.png"}
+            {/if}
+                <img src="{$url_img}">
+        </a>
+		
+		<img src="{$this->HtmlProduct->get_thumb_350($url_img)}">
+		
+		/uploads/plugin/custom_img/2021-01-29/thumb/thumb_350_line-of-vision-mission-core-value-line-of-vision-mission-core-value.png

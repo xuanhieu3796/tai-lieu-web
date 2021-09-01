@@ -1,0 +1,240 @@
+<div class="product-detail-contact clearfix">
+                    <a data-toggle="modal" data-target="#popup-dangkydathang">
+                        Yêu cầu báo giá
+                    </a>
+                </div>
+
+
+
+
+{$id_form = "frm-send-contact-{rand()}"}
+<div id="popup-dangkydathang" class="contact-block-custom modal fade {$arr_config.class_prefix}"  role="dialog">
+     <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="mart15 fll w100"></div>
+            <div class="frm-bk-contact">
+                <div class="frm-contact-top">
+                    <button type="button" class="close close-popup" data-dismiss="modal">
+                        <i class="fa fa-close"></i>
+                    </button>
+                     <div class="iphorm-group-title">Liên hệ tư vấn sản phẩm</div>
+                    <div class="contact-wrap">
+                        <h4>{$arr_data.seo_title}</h4>
+                        <p>
+                            Tôi muốn mua sản phẩm này, vui lòng liên hệ với tôi theo thông tin dưới đây
+                        </p>
+                    </div>
+                </div>
+                <form id="frm-send-contact-detail" class="frm-required form-contact" method="POST"
+                          action="{Router::url('/contact/contact-us/send-request', true)}">
+                        <div class="form-group hidden">
+                            <input class="form-control required" type="text" name="title"
+                                   value="Tư vấn sản phẩm: {$arr_data.name}" />
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control required" type="text" name="full_name"
+                                   placeholder="Họ tên (*)"/>
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control required" type="number" name="phone"
+                                   placeholder="Số điện thoại (*)"/>
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control required" type="email" name="email"
+                                   placeholder="Email (*)"/>
+                        </div>
+                        <div class="form-group">
+                            <textarea id="content_textarea" name="content" class="form-control" 
+                                      rows="3" placeholder="Ghi chú (không bắt buộc)"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-submit btnSubmit-modal">
+                                <span class="name">GỬI CHO CHÚNG TÔI</span> 
+                            </button>
+                        </div>
+                    </form>
+            </div>            
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+    $.validator.addMethod(
+        "regex",
+        function (value, element, regexp) {
+            var re = new RegExp(regexp);
+            return this.optional(element) || re.test(value);
+        },
+        "regex Mở rộng"
+    );
+
+    $("#frm-send-contact-detail").validate({
+        rules: {
+            "full_name": {
+                required: true,
+            },
+            "title": {
+                required: true,
+            },
+            "email": {
+                required: true,
+                email: true
+            },
+        },
+        messages: {
+            full_name: {
+                required: '{__d('default','required_full_name')}',
+            },
+            phone: {
+                required: '{__d('default','required_phone')}',
+            },
+            title: {
+                required: '{__d('default','required_title')}',
+            },
+            email: {
+                required: '{__d('default','format_email')}',
+                email: '{__d('default','format_email')}',
+            }
+        },
+        showErrors: function (errorMap, errorList) {
+            // Clean up any tooltips for valid elements
+            $.each(this.validElements(), function (index, element) {
+                nh_functions.showTooltipSuccess(element);
+            });
+
+            // Create new tooltips for invalid elements
+            $.each(errorList, function (index, error) {
+                nh_functions.showTooltipError(error.element, error.message);
+            });
+        },
+        submitHandler: function (form) {
+            nh_functions.showLoadingPage();
+            $.ajax({
+                url: form.action,
+                type: form.method,
+                async: false,
+                contentType: false,
+                processData: false,
+                data: new FormData($(form).get(0)),
+                dataType: 'json',
+                success: function (response) {
+                    setTimeout(function () {
+                        if (response.code == 'success') {
+                            // alert success
+                            nh_functions.showAlertGritter('success', 'Gửi yêu cầu thành công !');
+                            $('#frm-send-contact input').val('');
+                            $('#content_textarea').val('');
+                        } else {
+                            nh_functions.showAlertGritter('error', response.messages);
+                        }
+                        nh_functions.hiddenLoadingPage();
+                    }, 1000);
+
+                },
+                error: function (response, json, errorThrown) {
+                    nh_functions.showAlertGritter('error', response.messages);
+                }
+            });
+        }
+    });
+</script>
+
+
+
+
+
+div#popup-dangkydathang {}.contact-block-custom .modal-dialog {
+    max-width: 430px;
+    position: relative;
+    top: 20%;
+}
+.iphorm-group-title {
+    background: rgb(34, 34, 34);
+    color: rgb(255, 255, 255);
+    font-weight: 400;
+    padding: 20px 0px;
+    text-align: center;
+    font-size: 14px;
+    text-transform: uppercase;
+}
+.contact-wrap {
+    padding: 0 15px;
+    margin-top: 15px;
+}
+
+.contact-wrap p {
+    font-size: 13px;
+    color: #777;
+    text-align:center;
+}
+.contact-block-custom .modal-content {
+    padding: 10px;
+    z-index: 999;
+}
+.modal-content {
+    position: relative;
+    background-color: #fff;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+    border: 5px solid rgba(225,225,225,.2);
+    border-radius: 5px !important;
+    outline: 0;
+    -webkit-box-shadow: 0 3px 9px rgb(0 0 0 / 10%);
+    box-shadow: 0 3px 9px rgb(0 0 0 / 10%);
+}
+.contact-block-custom .form-contact {
+    padding: 0 15px;
+}
+.contact-block-custom .modal-content .frm-bk-contact {
+    border: 1px solid #eee;
+}
+.contact-block-custom .form-contact .form-group .form-control {
+    margin: 0;
+    margin-bottom: 3px;
+    color: #999;
+    border: solid 1px #CCC;
+    background: #f5f5f5;
+    height: auto;
+    padding: 0.67em 0.5em;
+}
+.contact-wrap h4 {
+    text-align: center;
+    color: #222;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.contact-block-custom .modal-content .frm-bk-contact .form-group:last-child {
+    text-align: center;
+    margin-bottom: 0;
+}
+
+.contact-block-custom .modal-content .frm-bk-contact button.btn.btn-submit {
+    color: #fff;
+    background: #222222;
+}
+.close-popup {
+    background: #222 !important;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    color: #fff;
+    font-size: 14px;
+    border: 2px solid #fff !important;
+    position: absolute;
+    top: -15px;
+    right: -15px;
+    opacity: 1;
+}
+.product-detail-contact a {
+    padding: 10px 20px;
+    background: #00892f !important;
+    color: #fff;
+    display: inline-block;
+    border-radius: 3px;
+    font-weight: 500;
+    cursor: pointer;
+    text-transform: capitalize;
+    margin-bottom: 15px;
+}

@@ -1,0 +1,77 @@
+{if !empty($arr_lang)}
+    <div class="box-right">
+        <div class="item-dropdown Foatright item-inline dropdown">
+            {if array_key_exists($lang,$arr_lang)}
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                    <span class="{$arr_lang.$lang.class_icon} hide">&nbsp;</span>
+                    <span class="icon_img">
+                        {$icon_img = $arr_lang.$lang.icon_img}
+                        {if !$arr_lang.$lang.icon_img}
+                            {$icon_img = "{Router::url('/', true)}img/lang/flag-vie.jpg"}
+                        {/if}
+                        <img width="30" src="{Router::url('/', true)}{$icon_img}">
+                    </span>
+                </a>
+            {/if}
+                {foreach from = $arr_lang key = key item = item}
+                    {if $lang ne $key}
+                        <a class="click-language" data-lang="{$key}" href="javascript://;">
+                            <span class="{$item.class_icon} hide">&nbsp;</span>
+                            <span class="icon_img">
+                                {$icon_img_list = $arr_lang.$key.icon_img}
+                                {if !$arr_lang.$key.icon_img}
+                                    {$icon_img_list = "{Router::url('/', true)}img/lang/flag-vie.jpg"}
+                                {/if}
+                                <img width="30" src="{Router::url('/', true)}{$icon_img_list}">
+                            </span>
+                        </a>
+                    {/if}
+                {/foreach}
+            <!--<ul class="dropdown-menu" role="menu" style="right: 0;left: auto;">-->
+            <!--    {foreach from = $arr_lang key = key item = item}-->
+            <!--        {if $lang ne $key}-->
+            <!--            <li>-->
+            <!--                <a class="click-language" data-lang="{$key}" href="javascript://;">-->
+            <!--                    <span class="{$item.class_icon} hide">&nbsp;</span>-->
+            <!--                    <span class="icon_img">-->
+            <!--                        {$icon_img_list = $arr_lang.$key.icon_img}-->
+            <!--                        {if !$arr_lang.$key.icon_img}-->
+            <!--                            {$icon_img_list = "{Router::url('/', true)}img/lang/flag-vie.jpg"}-->
+            <!--                        {/if}-->
+            <!--                        <img width="20" src="{Router::url('/', true)}{$icon_img_list}">-->
+            <!--                    </span>-->
+            <!--                    {$item.name}-->
+            <!--                </a>-->
+            <!--            </li>-->
+            <!--        {/if}-->
+            <!--    {/foreach}-->
+            <!--</ul>-->
+        </div>
+    </div>
+    <script type="text/javascript">
+        $(document).on('click', '.click-language', function (event) {
+            var lang = $(this).attr('data-lang');
+            $.ajax({
+                url: '/Dashboard/writeLanguage',
+                type: 'POST',
+                async: false,
+                data: {
+                    lang: lang,
+                    url: window.location.pathname
+                },
+                dataType: 'json',
+                success: function (response) {
+                    if (response.code == -1) {
+                        errorHandler(response);
+                    } else {
+                        nh_functions.redirect(nh_functions.routeUrl(response.url));
+                    }
+                },
+                error: function (response, json, errorThrown) {
+                    //console.log(response,'error');
+                    errorHandler(response);
+                }
+            });
+        });
+    </script>
+{/if}

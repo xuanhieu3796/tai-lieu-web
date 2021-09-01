@@ -1,0 +1,29 @@
+.slider-product.owl-theme .owl-controls .owl-buttons div {
+    top: 50%;
+    bottom: inherit;
+    width: 30px;
+    height: 60px;
+    background-color: rgba(255,255,255,.5);
+    border-radius: 2px;
+    line-height: 55px;
+    font-size: 30px;
+    box-shadow: 0 2px 6px 0px rgba(0,0,0,.3);
+    opacity: 0;
+    transition: all .3s linear;
+}
+
+.slider-product.owl-theme .owl-controls .owl-buttons div.owl-next {
+    right:0 ;
+    transform: translateY(-50%) translateX(100%);
+}
+.slider-product:hover div.owl-prev, .slider-product:hover div.owl-next {
+    transform: translateY(-50%) translateX(0%) !important;
+    opacity: 1 !important;
+}
+.slider-product.owl-theme .owl-controls .owl-buttons div.owl-prev {
+    transform: translateY(-50%) translateX(-100%);
+}
+.slider-product.owl-theme .owl-controls .owl-buttons div.owl-prev {
+    left: 0;
+    right: initial;
+}

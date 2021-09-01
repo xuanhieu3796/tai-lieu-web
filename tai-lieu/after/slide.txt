@@ -1,0 +1,233 @@
+<div class="mighty-slider mightyslider_modern_skin {$arr_config.class_prefix}">
+    <div class="frame">
+        <div class="slide_element">
+
+            {if !empty($arr_data)}
+                {foreach from=$arr_data item=item}
+                    {if $data_type == 'gallery' && !empty($item.url_img)}
+                        {assign var = url_img value = "{Router::url('/', true)}{$item.url_img}"}
+                        {if !empty($item.link)}
+                            {assign var = link value = $item.link}
+                        {else}
+                            {assign var = link value = "#"}
+                        {/if}
+                        <div class="slide"
+                             data-mightyslider="cover: '{$url_img}', link: { url: '{$link}', target: '_self' }"
+                             data-msanimation="{ delay: 19000, style: { x: 0 } }, { delay: 5000, style: { x: '-100%' } }, { delay: 1900 }">
+                            <div class="mSCaption titres" data-mightyslider=""
+                                 data-msanimation="{ delay: 1000, style: { x: 0 } }, { delay: 5000, style: { x: '-100%' } }, { delay: 1900 }">
+
+                                {if !empty($item.name) && !empty($show_title_slider)}
+                                    <h1 class="titrePartie">
+                                        <span class="mSCaption transparent l1"
+                                              data-mightyslider="loop: true, dontDelayOnRepeat: true"
+                                              data-msanimation="{ delay: 1000, speed: 1000, style: { opacity: 1, x: 50 } }, { delay: 3000, speed: 1000, style: { opacity: 0, x: -50 } }, { delay: 19000 }">
+                                            {$item.name}
+                                        </span>
+                                    </h1>
+                                {/if}
+
+                                {if !empty($item.description) && !empty($show_description)}
+                                    <span class="mSCaption transparent sousTitre"
+                                          data-mightyslider="loop: true, dontDelayOnRepeat: true"
+                                          data-msanimation="{ delay: 1200, speed: 1000, style: { opacity: 1, x: 50 } }, { delay: 3000, speed: 1000, style: { opacity: 0, x: -50 } }, { delay: 19000 }">
+                                        {$item.description}
+                                    </span>
+                                {/if}
+
+                                {if !empty($show_more)}
+
+                                    <a href="#" class="mSCaption transparent sousTitre" data-mightyslider="loop: true, dontDelayOnRepeat: true" data-msanimation="{ delay: 1200, speed: 1000, style: { opacity: 1, x: 50 } }, { delay: 3000, speed: 1000, style: { opacity: 0, x: -50 } }, { delay: 19000 }" style="position: absolute; opacity: 0; transform: translate3d(-50px, 0px, 0px);">
+                                            {__d('default', 'see_more')}
+                                    </a>
+
+                                {/if}
+                            </div>
+
+                        </div>
+                    {/if}
+
+                    {if $data_type == 'video'}
+                        {if $item.video_type == 'youtube'}
+                            <div class="slide" data-mightyslider="video: 'https://www.youtube.com/watch?v={$item.url_media}'"
+                                 data-msanimation="{ delay: 19000, style: { x: 0 } }, { delay: 5000, style: { x: '-100%' } }, { delay: 19000 }">
+                                <div class="mSCaption titres" data-mightyslider="loop: true, dontDelayOnRepeat: true"
+                                     data-msanimation="{ delay: 1000, style: { x: 0 } }, { delay: 5000, style: { x: '-100%' } }, { delay: 19000 }">
+
+                                    {if !empty($item.name) && !empty($show_title_slider)}
+                                        <h1 class="titrePartie">
+                                        <span class="mSCaption transparent l1"
+                                              data-mightyslider="loop: true, dontDelayOnRepeat: true"
+                                              data-msanimation="{ delay: 1000, speed: 1000, style: { opacity: 1, x: 50 } }, { delay: 3000, speed: 1000, style: { opacity: 0, x: -50 } }, { delay: 19000 }">
+                                            {$item.name}
+                                        </span>
+                                        </h1>
+                                    {/if}
+
+                                    {if !empty($item.description) && !empty($show_description)}
+                                        <span class="mSCaption transparent sousTitre"
+                                              data-mightyslider="loop: true, dontDelayOnRepeat: true"
+                                              data-msanimation="{ delay: 1200, speed: 1000, style: { opacity: 1, x: 50 } }, { delay: 3000, speed: 1000, style: { opacity: 0, x: -50 } }, { delay: 19000 }">
+                                        {$item.description}
+                                    </span>
+                                    {/if}
+
+                                    {if !empty($show_more)}
+                                        <h1 class="titrePartie">
+                                            <span class="mSCaption transparent l2"
+                                                  data-mightyslider="loop: true, dontDelayOnRepeat: true"
+                                                  data-msanimation="{ delay: 1000, speed: 1000, style: { opacity: 1, x: 50 } }, { delay: 3000, speed: 1000, style: { opacity: 0, x: -50 } }, { delay: 19000 }">
+                                                {__d('default', 'see_more')}
+                                            </span>
+                                        </h1>
+                                    {/if}
+                                </div>
+                            </div>
+                        {/if}
+
+                        {if $item.video_type == 'system'}
+                            <div class="slide slide_4 videoBackground"
+                                 data-mightyslider="cover: { webm: '/video/stream-video/{$item.id}', mp4: '/video/stream-video/{$item.id}' }">
+                            </div>
+                        {/if}
+                    {/if}
+                {/foreach}
+            {/if}
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function ($) {
+        var animationOut = "{if !empty($arr_config.animationOut)}{$arr_config.animationOut}{else}fadeOut{/if}";
+        var animationIn = "{if !empty($arr_config.animationIn)}{$arr_config.animationIn}{else}fadeIn{/if}";
+
+        if(animationOut == 'random'){
+            animationOut = ['fadeOut', 'fadeOutDown','fadeOutUp','flipOutX', 'bounceOut', 'zoomOut','slideOutDown'];
+        }
+
+        if(animationIn == 'random'){
+            animationIn = ['fadeIn','fadeInDown','fadeInUp', 'flipInX','bounceIn',  'zoomIn', 'slideInDown'];
+        }
+        var isTouch = !!('ontouchstart' in window);
+        var clickEvent = isTouch ? 'tap' : 'click';
+
+        var $mighty_slider = $('.mighty-slider'),
+            $frame = $('.frame', $mighty_slider),
+            lastIndex = 0;
+        $frame.mightySliderAnimate({
+                // Mixed options
+                speed: 1000,// Animations speed in milliseconds. 0 to disable animations.
+                preloadMode: 'all',// Preloading mode for slides covers. Can be: 'all', 'nearby', 'instant'.
+                startRandom: 0,// Starting offset in slides randomly, where: 1 = random, 0 = disable.
+                viewport: 'center',// Sets the cover image resizing method used to fit content within the viewport. Can be: 'center', 'fit', 'fill', 'stretch'.
+                easing: 'swing',// Easing for duration based (tweening) animations.
+                animateOut: animationOut,
+                animateIn: animationIn,
+                autoScale: 0, // Automatically updates slider height based on base width.
+                autoResize: 0,// Auto resize the slider when active slide is bigger than slider FRAME.
+                startAt: 0,          // Starting offset in slides.
+                startRandom: 0,          // Starting offset in slides randomly, where: 1 = random, 0 = disable.
+
+                // Navigation options
+                navigation: {
+                    slideSize: '100%',
+                    keyboardNavBy: 'slides'
+                },
+
+                //Thumbnails
+                thumbnails: {
+                    thumbnailNav: 'forceCentered',
+                    activateOn: clickEvent
+                },
+
+                // Pages
+                pages: {
+                    activateOn: 'click'
+                },
+
+                // Dragging
+                dragging: {
+                    touchDragging: 1,
+                    onePage: 1,
+                    swingSpeed: 0.1
+                },
+
+                // cycling
+                cycling: {
+                    cycleBy: {if !empty($arr_config.auto_play)}'slides'{else}'' {/if}, // Enable automatic cycling by 'slides' or 'pages'.
+                    loop: 1,    // Repeat cycling when last slide/page is activated.
+                    pauseTime: {if !empty($arr_config.interval)}{$arr_config.interval}{else}6000{/if},
+                    pauseOnHover: 0,    // Pause cycling when mouse hovers over the FRAME.
+                    startPaused: 0     // Whether to start in paused sate.
+                },
+
+                // Commands
+                commands: {
+                    pages: {if !empty($arr_config.dots)}1{else}0{/if},
+                    thumbnails: {if !empty($arr_config.preview)}1{else}0{/if},
+                    buttons: {if !empty($arr_config.navigation)}1{else}0{/if}
+                }
+            },
+            {
+                active: function (name, index) {
+                    if (lastIndex === index)
+                        return false;
+
+                    var self = this,
+                        el = this.slides[index].element,
+                        $videos = $('video', $mighty_slider),
+                        $video = $('video', el);
+                    video = $video[0];
+                    $videos.unbind('ended').each(function () {
+                        this.pause();
+                    });
+
+                    if (video && video.paused) {
+                        if (video.currentTime !== 0)
+                            video.currentTime = 0;
+
+                        video.play();
+
+                        $video.one('ended', function () {
+                            if (index === self.slides.length - 1)
+                                self.activate('0');
+                            else
+                                self.next();
+                        });
+                    }
+
+                    lastIndex = index;
+                },
+                coverLoaded: function (name, index) {
+                    var self = this,
+                        el = this.slides[index].element,
+                        $video = $('video', el);
+                    video = $video[0];
+
+                    if (video) {
+                        video.removeAttribute('loop');
+
+                        if (self.relative.activeSlide !== index)
+                            video.pause();
+                        else
+                            $video.one('ended', function () {
+                                if (index === self.slides.length - 1)
+                                    self.activate('0');
+                                else
+                                    self.next();
+                            });
+                    }
+                }
+            });
+
+        $(document).on(clickEvent, '.paper_watch', function () {
+            var $parent = $(this).parents('.mSSlide'),
+                $playIcon = $('.mSVideo', $parent);
+
+            $playIcon.trigger('click');
+        });
+    });
+</script>
+
+

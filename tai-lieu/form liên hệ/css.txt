@@ -1,0 +1,51 @@
+
+div#addthis-modalContact .modal-dialog {
+    top: 20%;
+    width: 400px;
+}
+.modal-content {
+    position: relative;
+    background-color: #fff;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+    border: 5px solid rgba(225,225,225,.2);
+    border-radius: 5px !important;
+    outline: 0;
+    -webkit-box-shadow: 0 3px 9px rgb(0 0 0 / 10%);
+    box-shadow: 0 3px 9px rgb(0 0 0 / 10%);
+    padding: 10px;
+}
+.close-popup {
+    background: #222 !important;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    color: #fff;
+    font-size: 14px;
+    border: 2px solid #fff !important;
+    position: absolute;
+    top: -15px;
+    right: -15px;
+    opacity: 1;
+}
+.modal-content .frm-bk-contact {
+    border: 1px solid #eee;
+}
+.contact-block-custom .form-contact {
+    padding: 0 15px;
+}
+.modal-content .frm-bk-contact .iphorm-group-title {
+        background: rgb(34, 34, 34);
+        color: rgb(255, 255, 255);
+        font-weight: 400;
+        padding: 20px 0px;
+        text-align: center;
+        font-size: 14px;
+        text-transform: uppercase;
+        margin-bottom: 17px;
+}
+
+.frm-bk-contact form#frm-send-contact-detail .form-group:last-child {
+    text-align: center;
+    margin-bottom: 0;
+}

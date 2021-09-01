@@ -1,0 +1,318 @@
+<!--Schema cho Sản phẩm: Plugin/Products/ProductsHome/detail.tpl-->
+
+{if !empty($arr_data)}
+<script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "Product",
+        "name": "{$arr_data.name}",
+        {if !empty($arr_data.description)}
+            "description": "{$this->Slug->subStringLength($arr_data.description,220)}",
+        {/if}
+        {if !empty($arr_data.media) && $arr_data.media|@count > 0}
+            "image": [
+                {foreach from = $arr_data.media key=k_lightbox item=lightbox name=foo}
+                    "{$lightbox.path_original}"{if !$smarty.foreach.foo.last},{/if}
+                {/foreach}
+            ],
+        {/if}
+        {if !empty($arr_data.manufacture_name)}
+            "brand": {
+                "@type": "Thing",
+                "name": "{$arr_data.manufacture_name}"
+            },
+        {/if}
+        {if !empty($arr_data.price)}
+            "offers": {
+                "@type": "AggregateOffer",
+				{if !empty($arr_data.price)}"offerCount": "{round($arr_data.price)}",{/if}
+                {if !empty($arr_data.price)}"lowPrice": "{$arr_data.price}",{/if}
+                {if !empty($arr_data.price_sale)}"highPrice": "{$arr_data.price_sale}",{/if}
+                "priceCurrency": "{__d('default','currency_unit')}"
+            },
+        {/if}	
+		{if !empty($arr_data.barcode)}
+            "gtin13": "{$arr_data.barcode}",
+        {/if}
+		
+        {if !empty($arr_data.code)}
+            "sku": "{$arr_data.code}"
+        {/if}
+		
+    }
+</script>
+{/if}
+
+
+
+<!--Schema cho Đường dẫn: Plugin/Breadcrumb/Breadcrumb/index.tpl-->
+
+<script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement":
+        [
+            {
+                "@type": "ListItem",
+                "position": 1,
+                "item":
+                {
+                    "@id": "{Router::url('/', true)}",
+                    "name": "{__d('default','breadcrumb_home')}"
+                }
+            {if !empty($arr_breadcrumb)}
+                    {foreach from=$arr_breadcrumb key = key name = breadcrumb item=item}
+                    },
+                    {
+                        "@type": "ListItem",
+                        "position": {$key+2},
+                        "item":
+                        {
+                            "@id": "{Router::url('/', true)}{$item.url}",
+                            "name": "{$item.name}"
+                        }
+                {/foreach}
+            {/if}
+            }
+        ]
+    }
+</script>
+
+
+sua
+
+<script>
+{
+    "@context":"https://schema.org",
+    "@type":"BreadcrumbList",
+    "itemListElement":
+    [
+        {if !empty($arr_breadcrumb)}
+            {foreach from=$arr_breadcrumb key = key name = breadcrumb item=item}
+                {
+                    "@type": "ListItem",
+                    "position": {$key + 1},
+                    "item":
+                    {
+                      "@id": "{Router::url('/', true)}{$item.url}",
+                      "name": "{htmlentities( $item.name, ENT_COMPAT, 'UTF-8')}"
+                    }
+                }{if !$smarty.foreach.breadcrumb.last},{/if}
+            {/foreach}
+        {/if}
+    ]
+}
+</script>
+
+
+
+
+<!--Schema cho Bài viết: Plugin/Introduce/IntroducePlugin/detail.tpl-->
+
+{if !empty($arr_data)}
+<script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "NewsArticle",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "{Router::url('/',true)}{$smarty.server.REQUEST_URI}"
+        },
+        "headline": "{if !empty($arr_data.seo_title)}{$arr_data.seo_title}{/if}",
+        "description": "{if !empty($arr_data.seo_description)}{$arr_data.seo_description}{/if}",
+        "image": [
+            "{if !empty($arr_data.url_img)}{Router::url('/',true)}{$arr_data.url_img}{/if}"
+        ],
+        "author": {
+            "@type": "Organization",
+            "name": "{if !empty($config_info_pages.company_name)}{$config_info_pages.company_name}{/if}"
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "{if !empty($config_info_pages.company_name)}{$config_info_pages.company_name}{/if}",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "{if !empty($config_info_pages.logo)}{Router::url('/',true)}{$config_info_pages.logo}{/if}"
+            }
+        },
+        "datePublished": "{if !empty($arr_data.created)}{$arr_data.created}{/if}",
+        "dateModified": "{if !empty($arr_data.updated)}{$arr_data.updated}{else}{$arr_data.created}{/if}"
+    }
+</script>
+{/if}
+
+<!--Schema cho danh sách Sản phẩm: Plugin/Products/ProductsHome/product_category.tpl-->
+
+<script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "ItemList",
+        "itemListElement": [
+            {foreach from = $arr_data key = key name = foo item = item}
+                {assign var = url_img value = "{Router::url('/', true)}{$this->Images->checkImageURL($item)}"}
+                {
+                    "@type": "ListItem",
+                    "position": "{$key+1}",
+                    "item": {
+                        "@type": "Recipe",
+                        "url": "{Router::url('/',true)}{$arr_param.slug_page}#{$key+1}",
+                        "name": "{$item.name}",
+                        "image": [
+                            "{$url_img}"
+                        ],
+                        "author": {
+                            "@type": "Person",
+                            "name": "{$config_info_pages.company_name}"
+                        },
+                        "description": "{$this->Slug->subStringLength($arr_data.description,220)}"
+                    }
+                }{if !$smarty.foreach.foo.last},{/if}
+            {/foreach}
+        ]
+    }
+</script>
+
+
+
+
+<!--Chi tiết tin tức-->
+
+<script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "NewsArticle",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "{Router::url('/',true)}{$smarty.server.REQUEST_URI}"
+        },
+        "headline": "{$arr_data.Content.seo_title}",
+        "description": "{$arr_data.Content.seo_description}",
+        "image": [
+            "{$arr_data.url_img}"
+        ],
+        "author": {
+            "@type": "Organization",
+            "name": "{$config_info_pages.company_name}"
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "{$config_info_pages.company_name}",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "{$config_info_pages.logo}"
+            }
+        },
+        "datePublished": "{$arr_data.created_on}",
+        "dateModified": "{if !empty($arr_data.updated_on)}{$arr_data.updated_on}{else}{$arr_data.created_on}{/if}"
+    }
+</script>
+
+
+//Schema cho trang mặc định View/Layouts/layout_default.tpl
+
+<script type="application/ld+json">
+	{
+		"@context": "https://schema.org",
+		"@type": "Organization",
+		"name": "{strip_tags($meta_seo.seo_title)}",
+		"url": "{Router::fullbaseUrl()}",
+		"logo": "{$config_info_pages.logo}",
+		"contactPoint": [
+			{
+				"@type": "ContactPoint",
+				"telephone": "+84{$config_info_pages.hotline}",
+				"contactType": "customer service"
+			},
+			{
+				"@type": "ContactPoint",
+				"telephone": "+84{$config_info_pages.phone}",
+				"contactType": "technical support"
+			}
+		]
+	}
+</script>
+<script type="application/ld+json">
+	{
+		"@context": "https://schema.org",
+		"@type": "WebSite",
+		"name": "{strip_tags($meta_seo.seo_title)}",
+		"url": "{Router::fullbaseUrl()}",
+		"potentialAction": {
+			"@type": "SearchAction",
+			"target": "{Router::fullbaseUrl()}/search?keyword={literal}{search_term_string}{/literal}",
+			"query-input": "required name=search_term_string"
+		}
+	}
+</script>
+
+
+
+
+
+
+Lấy dữ liệu mặc định:
+
+<!--Trang chi tiết sp:-->
+
+{if !empty($arr_data)}
+<script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "Product",
+        "name": "{$arr_data.name}",
+        {if !empty($arr_data.description)}
+            "description": "{$this->Slug->subStringLength($arr_data.description,220)}",
+        {/if}
+        {if !empty($arr_data.media) && $arr_data.media|@count > 0}
+            "image": [
+                {foreach from = $arr_data.media key=k_lightbox item=lightbox name=foo}
+                    "{$lightbox.path_original}"{if !$smarty.foreach.foo.last},{/if}
+                {/foreach}
+            ],
+        {/if}
+        
+        "brand": {
+            "@type": "Thing",
+            "name": "Công ty cổ phần dịch vụ và địa ốc Đất Xanh Miền Bắc"
+        },
+   
+        "review": {
+            "@type": "Review",
+            "reviewRating": {
+                "@type": "Rating",
+                "ratingValue": "4",
+                "bestRating": "5"
+            },
+            "author": {
+                "@type": "Person",
+                "name": "Công ty cổ phần dịch vụ và địa ốc Đất Xanh Miền Bắc"
+            }
+        },
+        
+        "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "4.4",
+            "reviewCount": "89"
+        },
+        
+        "offers": {
+            "@type": "Offer",
+            "url": "{$app.requestUri}",
+            "priceCurrency": "VNĐ",
+            "price": "0",
+            "priceValidUntil": "2020-10-31",
+            "availability" : "http://schema.org/LimitedAvailability"
+        },	
+            
+		{if !empty($arr_data.barcode)}
+            "gtin13": "{$arr_data.barcode}",
+        {/if}
+		
+        {if !empty($arr_data.code)}
+            "sku": "{$arr_data.code}"
+        {/if}
+		
+    }
+</script>
+{/if}

@@ -1,0 +1,10 @@
+$(document).ready(function () {
+    var this_url = document.location.href;
+    $( ".wsmenu-list > li > .navtext" ).each(function() {
+        var url_manu_this = $(this).attr('href');
+        if(url_manu_this == this_url){
+            $( this ).addClass( "active" );
+        }
+    });
+
+});

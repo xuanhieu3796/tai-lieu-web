@@ -1,0 +1,65 @@
+<div class="wsmenucontainer clearfix">
+    <div class="overlapblackbg"></div>
+    <div class="wsmobileheader clearfix">
+        <a id="wsnavtoggle" class="animated-arrow">
+            <span></span>
+        </a>
+    </div>
+
+    <div class="webslidemenu-horizontal">
+        <div class="wsmain">
+            <nav class="wsmenu clearfix">
+                
+                 {if $device eq 2}
+                  <div class="searchMobile">
+                        <div class="boxSearch-mobile">
+                         <form id="form-suggestion" data-type="news" class="form-inline" action="{Router::url('/', true)}search/news/basic-search-new" method="get" enctype="multipart/form-data">
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <input type="text" class="form-control search-suggestion" name="keyword" placeholder="{__d('default','search_keyword')}">
+                                    <div id="search-type" class="input-group-addon">
+                                        <div class="dropdown">
+                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                                <span class="hidden-ipad">{__d('default','new_title')}</span>
+                                                <span class="caret"></span>
+                                            </a>
+                                            <ul class="dropdown-menu">
+                                                <li data-type="products"><a hre="#">{__d('default','product_title')}</a></li>
+                                                <li data-type="news"><a hre="#">{__d('default','new_title')}</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-search btn-main btn-submit">
+                                    <i class="fa fa-search" aria-hidden="true"></i>
+                                </button>
+                            </div>
+                        </form>
+                        </div>
+                    </div>
+
+                
+                {/if}
+                
+                <ul class="mobile-sub wsmenu-list">
+                    {if !empty($arr_menu)}
+                        {foreach from = $arr_menu item = item}
+                            {if $item.status eq "1" && !empty($item.sub_menu)}
+                                {if $item.sub_menu == 'mega'}
+                                    {$this->element('MainMenu.item_mega',['item'=> $item])}
+                                {elseif $item.sub_menu == 'half'}
+                                    {$this->element('MainMenu.item_half',['item'=> $item])}
+                                {elseif $item.sub_menu == 'department'}
+                                    {$this->element('MainMenu.item_department',['item'=> $item])}
+                                {else}
+                                    {$this->element('MainMenu.item_dropdown',['item'=> $item])}
+                                {/if}
+                            {/if}
+                        {/foreach}
+                    {/if}
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
