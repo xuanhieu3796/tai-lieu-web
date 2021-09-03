@@ -50,6 +50,10 @@ css
 
 .mt-60 {margin-top: } - .mr-60 { margin-right:  } - .mb-60 {margin-bottom:} - .ml-60 {margin-left:}
 
+position-relative 
+
+text-center
+
 font-size
 
 .fs-1 {font-size: 30px !important;} - .fs-2 {font-size: 29px !important;}.fs-3 {font-size: 28px !important;}.fs-4 {font-size: 27px !important;}.fs-5 {font-size: 26px !important;}
