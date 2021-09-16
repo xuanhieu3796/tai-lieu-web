@@ -76,6 +76,16 @@ dữ liệu mở rộng
 	},
 	"col": "col-lg-4 col-md-6 col-6"
 }
+{
+	"locale": {
+		"vi": {
+			"tieu_de": "ĐỘI NGŨ BÁC SĨ"
+		}
+	},
+	"element": "item_small_list_team",
+	"col": "col-12  col-lg-12"
+}
+
 
 {
 	"locale": {
