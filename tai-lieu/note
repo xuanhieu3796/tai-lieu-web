@@ -1,0 +1,68 @@
+
+database 9tech
+
+http://171.244.27.149/phpmyadmin
+techvn_admin / l2kbkyPkz
+
+9tech.com.vn
+ip: 171.244.27.149
+control: http://171.244.27.149:2223/
+user: techvn
+pass: PLWt19gmP
+
+ver 5
+this->element("../block/{$block_type}/{$element}", [
+    'article' => $article,
+    'is_slider' => $is_slider,
+    'col' => $col,
+    'type_media' => $type_media
+])}
+{
+	"element": "item_home",
+	"col": "col-md-12 col-12"
+}
+
+d-flex (    display: flex!important;)
+
+flex-wrap (     flex-wrap: wrap!important;)
+
+justify-content-between (    justify-content: space-between!important;)
+
+align-items-center (    align-items: center!important;)
+
+css 
+
+.m-55 {margin: 55px !important;}
+
+(.my-55 {margin-top: ; margin-bottom: ;}) - (.mx-55 { margin-left:; margin-right: ;})
+
+.mt-55 {margin-top: ; } - .mr-55 {margin-right: ;} - .mb-55 { margin-bottom: ;}
+
+.ml-55 { margin-left: ;}
+
+.p-55 {padding: ;}
+
+.py-55 { padding-top: ; padding-bottom: ;} - .px-55 {padding-left: ; padding-right:  }
+
+.pt-55 { padding-top: } - .pr-55 { padding-right: ; } - .pb-55 { padding-bottom:  } - .pl-55 {padding-left: }
+
+.m-60 {margin: 60px !important;} - .my-60 {margin-top: ; margin-bottom:} - .mx-60 {margin-left: ;margin-right: }
+
+.mt-60 {margin-top: } - .mr-60 { margin-right:  } - .mb-60 {margin-bottom:} - .ml-60 {margin-left:}
+
+position-relative 
+
+text-center
+
+font-size
+
+.fs-1 {font-size: 30px !important;} - .fs-2 {font-size: 29px !important;}.fs-3 {font-size: 28px !important;}.fs-4 {font-size: 27px !important;}.fs-5 {font-size: 26px !important;}
+.fs-6 {font-size: 25px !important;}.fs-7 {font-size: 24px !important;}.fs-8 {font-size: 23px !important;}.fs-9 {font-size: 22px !important;}.fs-10 {font-size: 21px !important;}.fs-11 {font-size: 20px !important;}
+.fs-12 {font-size: 19px !important;}.fs-13 {font-size: 18px !important;}.fs-14 {font-size: 17px !important;}.fs-15 {font-size: 16px !important;}.fs-16 {font-size: 15px !important;}.fs-17 {font-size: 14px !important;}
+.fs-18 {font-size: 13px !important;}.fs-19 {font-size: 12px !important;}.fs-20 {font-size: 11px !important;}.fs-21 {font-size: 10px !important;}
+
+
+màu chung
+color: var(--color-text);
+background: var(--color-text);
+   
